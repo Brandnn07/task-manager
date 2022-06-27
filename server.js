@@ -1,17 +1,20 @@
-const express = require('express');
-const apiRoutes = require('./routes');
-const publicRoutes = require('./routes/publicRoutes');
+var mysql = require("mysql");
+var express = require("express");
+var apis = require("./routes/apis");
+var public = require("./routes/public");
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3000;
+
 
 app.use(express.json());
-app.use(express.urlencoded({ extended:true }));
-app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}));
+app.use(express.static("public"));
 
-app.use(apiRoutes);
-app.use(publicRoutes);
+app.use(apis);
+app.use(public);
+
 
 app.listen(PORT, function() {
-  console.log(`Your app is now up on port ${PORT}`);
-})
+  console.log(`The app is now listening at this port: ${PORT}`);
+});
